@@ -8,6 +8,12 @@ typedef struct pos
 	int x;
 } pos_t;
 
+typedef struct stat
+{
+	int pif;
+	int fprec;
+}fsta_t;
+
 char *merge_str(char *princ, char *scd);
 char *parser(char *str, char *s);
 char *reduce_from(char *str, int from);
@@ -24,8 +30,10 @@ char *conv_int_str(int nbr);
 char *my_revstr(char *str);
 char *array_to_str(int argc, char **argv);
 pos_t *strlen_array(int argc, char **argv);
-char *gnw(char *text);
-int gng(char *text, char *buffer);
+char *gnw(char *text, fsta_t *sta);
+char *gng(char *text, fsta_t *sta);
 int is_in(char *str, char *source);
 char *uptog(char *str);
-int strlew(char *text, int pif);
+int strlew(char *text, fsta_t *stat);
+fsta_t *create_fsta(void);
+fsta_t *refrs_fsta(fsta_t *buffer, int a);
