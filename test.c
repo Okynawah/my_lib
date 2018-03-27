@@ -3,13 +3,20 @@
 
 int main()
 {
+	/*
 	fsta_t *sta = create_fsta();
 	char *a = "abcd efg hij \"oui\"";
-	char *buf;
-	refrs_fsta(sta, strlew(a, sta));
-	refrs_fsta(sta, strlew(a, sta));
-	refrs_fsta(sta, strlew(a, sta));
-	print(gng(a, sta));
+	print(parser(a, st('e')));
+	*/
+	fsta_t *a = create_fsta("djd oijoij ijoj  ijiv y o huho");
+	print(gnw(a));
+	print(gnw(a));
+	print(gnw(a));
+	print(gnw(a));
+	print(gnw(a));
+
+	//print(parser(text, "ijoj"));
+	//print(parser(text, "ijoj"));
 
 	return 0;
 }

@@ -12,6 +12,7 @@ typedef struct stat
 {
 	int pif;
 	int fprec;
+	char *text;
 }fsta_t;
 
 char *merge_str(char *princ, char *scd);
@@ -21,7 +22,7 @@ int word_counter(char *str);
 int next_space(char *str, int o);
 int my_strlen(char *str);
 char *st(char c);
-void my_putstr(char *str);
+void print(char *str);
 int	my_strcmp(char *s1, char *s2);
 int strcomp_start(char *source, char *search);
 int	my_strcmp_end(char *origin, char *end);
@@ -30,10 +31,11 @@ char *conv_int_str(int nbr);
 char *my_revstr(char *str);
 char *array_to_str(int argc, char **argv);
 pos_t *strlen_array(int argc, char **argv);
-char *gnw(char *text, fsta_t *sta);
-char *gng(char *text, fsta_t *sta);
+char *gnw(fsta_t *sta);
+char *gng(fsta_t *sta);
 int is_in(char *str, char *source);
 char *uptog(char *str);
-int strlew(char *text, fsta_t *stat);
-fsta_t *create_fsta(void);
+int strle_nw(fsta_t *stat);
+fsta_t *create_fsta(char *text);
 fsta_t *refrs_fsta(fsta_t *buffer, int a);
+char **str_to_array(fsta_t *sta);

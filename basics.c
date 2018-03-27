@@ -25,20 +25,20 @@ char *parser(char *str, char *s)
 {
 	static char *save = NULL;
 	int i = 0;
-	char *rt;
+	char *rt = NULL;
 
 	for (;str[i];i++)
 		if (strcomp_start(reduce_from(str, i), s))
 			break;
-	if (strcomp_start(str, save) <= 0)
+	if (i >= my_strlen(str))
+		return (NULL);
+	if (strcomp_start(str, save) == 1)
 		rt = malloc(sizeof(char) * my_strlen(str) - (my_strlen(s) + i));
 	else
 		rt = malloc(sizeof(char) * i);
-	i = (strcomp_start(str, save) <= 0) ? 0 : i + my_strlen(s);
-	for (int j = 0;str[i] && !strcomp_start(reduce_from(str, i), s);i++) {
+	i = (strcomp_start(str, save) != 1) ? 0 : i + my_strlen(s);
+	for (int j = 0;str[i] && !strcomp_start(reduce_from(str, i), s);i++, j++)
 		rt[j] = str[i];
-		j++;
-	}
 	return (save = rt);
 }
 

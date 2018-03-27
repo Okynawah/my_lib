@@ -23,6 +23,10 @@ char *st(char c)
 
 void print(char *str)
 {
-	for (int i = 0, c = str[0];str[i];++i, c = str[i])
-		write(1, &c, 1);
+	if (!str)
+		return;
+	if (my_strlen(str) <= 0)
+		return;
+	for (int i = 0; str[i];i++)
+		write(1, &str[i], 1);
 }
