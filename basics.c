@@ -20,7 +20,6 @@ char *merge_str(char *princ, char *scd)
 	return (retour);
 }
 
-
 char *parser(char *str, char *s)
 {
 	static char *save = NULL;
@@ -28,16 +27,16 @@ char *parser(char *str, char *s)
 	char *rt = NULL;
 
 	for (;str[i];i++)
-		if (strcomp_start(reduce_from(str, i), s))
+		if (strc_strt(reduce_from(str, i), s))
 			break;
 	if (i >= my_strlen(str))
 		return (NULL);
-	if (strcomp_start(str, save) == 1)
+	if (strc_strt(str, save) == 1)
 		rt = malloc(sizeof(char) * my_strlen(str) - (my_strlen(s) + i));
 	else
 		rt = malloc(sizeof(char) * i);
-	i = (strcomp_start(str, save) != 1) ? 0 : i + my_strlen(s);
-	for (int j = 0;str[i] && !strcomp_start(reduce_from(str, i), s);i++, j++)
+	i = (strc_strt(str, save) != 1) ? 0 : i + my_strlen(s);
+	for (int j = 0;str[i] && !strc_strt(reduce_from(str, i), s);i++, j++)
 		rt[j] = str[i];
 	return (save = rt);
 }
@@ -54,7 +53,7 @@ int word_counter(char *str)
 {
 	int counter = 0;
 	int i = 0;
-	while(1) {
+	while (1) {
 		for (; str[i] != ' '; i++)
 			if (str[i] == '\0')
 				return (counter + 1);
@@ -64,12 +63,12 @@ int word_counter(char *str)
 	return (0);
 }
 
-int next_space(char *str, int o)
+int next_space(char *str, int i_depart)
 {
-	int i = o;
-	for (;str[i];i++)
-		if (str[i] == ' ' || str[i] == '\n')
-			return (i - o);
+	int i_actuel = i_depart;
+	for (;str[i_actuel];i_actuel++)
+		if (str[i_actuel] == ' ' || str[i_actuel] == '\n')
+			return (i_actuel - i_depart);
 
-	return (i - o);
+	return (-1);
 }

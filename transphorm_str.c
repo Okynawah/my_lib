@@ -32,7 +32,7 @@ char *my_revstr(char *str)
 {
 	int i,n,m,z;
 	char y;
-	
+
 	for (i = 0;str[i];i++);
 	n = 0;
 	m = i;
@@ -45,6 +45,5 @@ char *my_revstr(char *str)
 		n = n + 1;
 		m = m - 1;
 	}
-    
-    return (str);
+	return (str);
 }

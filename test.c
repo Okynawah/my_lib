@@ -4,11 +4,11 @@
 int main()
 {
 	/*
-	fsta_t *sta = create_fsta();
+	fs_t *sta = create_fs();
 	char *a = "abcd efg hij \"oui\"";
 	print(parser(a, st('e')));
 	*/
-	fsta_t *a = create_fsta("djd oijoij ijoj  ijiv y o huho");
+	fs_t *a = create_fs("djd oijoij ijoj  ijiv y o huho");
 	print(gnw(a));
 	print(gnw(a));
 	print(gnw(a));

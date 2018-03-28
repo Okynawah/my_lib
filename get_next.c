@@ -6,15 +6,22 @@
 */
 #include "header_lib.h"
 
-char *gnw(fsta_t *sta)
+int facility(char c)
+{
+	if (!c)
+		return (0);
+	return (c == '\n' || c == ' ') ? 1 : 0;
+}
+
+char *gnw(fs_t *s)
 {
 	char *rt;
-	for (;sta->text[sta->pif] && (sta->text[sta->pif] == '\n' || sta->text[sta->pif] == ' ');++sta->pif);
-	rt = malloc(sizeof(char) * strle_nw(sta));
-	for (int j = 0;sta->text[sta->pif]; sta->pif++, j++) {
-		rt[j] = sta->text[sta->pif];
-		if (sta->text[sta->pif+1] == ' ' || sta->text[sta->pif+1] == '\n') {
-			sta->pif+=1;
+	for (;facility(s->txt[s->pif]);++s->pif);
+	rt = malloc(sizeof(char) * strle_nw(s));
+	for (int j = 0;s->txt[s->pif]; s->pif++, j++) {
+		rt[j] = s->txt[s->pif];
+		if (s->txt[s->pif+1] == ' ' || s->txt[s->pif+1] == '\n') {
+			s->pif+=1;
 			rt[j+1] = '\0';
 			break;
 		}
@@ -23,25 +30,23 @@ char *gnw(fsta_t *sta)
 	return (rt);
 }
 
-char *gng(fsta_t *sta)
+char *gng(fs_t *s)
 {
-	int start = 0;
+	int srt = 0;
 	int end = 0;
 	int compteur = 0;
 	char *rt = NULL;
-
-	for (int i = sta->pif;sta->text[i] && compteur < 2;i++)
-	{
-		compteur = (sta->text[i] == '"') ? compteur + 1 : compteur;
-		start = (compteur == 0) ? i+1 : start;
+	for (int i = s->pif;s->txt[i] && compteur < 2;i++) {
+		compteur = (s->txt[i] == '"') ? compteur + 1 : compteur;
+		srt = (compteur == 0) ? i+1 : srt;
 		end = (compteur == 1) ? i+1 : end;
 	}
 
 	if (compteur != 2)
 		return (rt);
-	rt = malloc(sizeof(char) * (end - start));
+	rt = malloc(sizeof(char) * (end - srt));
 	do {
-		rt = merge_str(rt, gnw(sta));
+		rt = merge_str(rt, gnw(s));
 		rt[my_strlen(rt)] = ' ';
 	} while (!is_in(st('\"'), rt));
 	rt[sizeof(rt)] = '\0';
@@ -62,37 +67,19 @@ char *uptog(char *str)
 	return (rt);
 }
 
-int strle_nw(fsta_t *stat)
+int strle_nw(fs_t *st)
 {
-	int i = stat->pif;
+	int i = st->pif;
 	int j = i;
-	for (;stat->text[j] == ' ' || stat->text[j] == ' '; ++j);
+	for (;st->txt[j] == ' ' || st->txt[j] == ' '; ++j);
 	i = j;
-	if (stat->text[i] != ' ')
-		for (;stat->text[i];i++)
-			if (stat->text[i] != ' ' && stat->text[i] != '\n')
+	if (st->txt[i] != ' ')
+		for (;st->txt[i];i++)
+			if (st->txt[i] != ' ' && st->txt[i] != '\n')
 				break;
 
-	for (;stat->text[i];i++)
-		if (stat->text[i] == ' ' || stat->text[i] == '\n')
+	for (;st->txt[i];i++)
+		if (st->txt[i] == ' ' || st->txt[i] == '\n')
 			break;
-	return (stat->pif - (stat->fprec - j));
-}
-
-fsta_t *create_fsta(char *str)
-{
-	fsta_t *buf = malloc(sizeof(fsta_t));
-	buf->pif = 0;
-	buf->fprec = 0;
-	buf->text = str;
-	return (buf);
-}
-
-fsta_t *refrs_fsta(fsta_t *buffer, int a)
-{
-	buffer->pif += a;
-	if (buffer->pif < 0)
-		buffer->pif = 0;
-	buffer->fprec =	buffer->pif;
-	return (buffer);
+	return (st->pif - (st->fprec - j));
 }

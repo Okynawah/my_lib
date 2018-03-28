@@ -28,7 +28,7 @@ int	my_strcmp(char *s1, char *s2)
 	return (1);
 }
 
-int strcomp_start(char *source, char *search)
+int strc_strt(char *source, char *search)
 {
 	int i = 0;
 
