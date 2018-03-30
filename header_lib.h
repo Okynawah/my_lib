@@ -15,7 +15,7 @@ typedef struct pos
 	int x;
 } pos_t;
 
-typedef struct stat
+typedef struct fsta
 {
 	int pif;
 	int fprec;
@@ -44,6 +44,7 @@ int is_in(char *str, char *source);
 char *uptog(char *str);
 int strle_nw(fs_t *stat);
 fs_t *create_fs(char *text);
-fs_t *refrs_fsta(fs_t *buffer, int a);
+fs_t *refrs_fs(fs_t *buffer, int a);
 char **str_to_array(fs_t *sta);
 char *upto(char *str);
+int conv_str_int(char *str);

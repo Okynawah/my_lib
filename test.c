@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "header_lib.h"
-
+/*
 int main()
 {
 	/*
@@ -8,6 +8,7 @@ int main()
 	char *a = "abcd efg hij \"oui\"";
 	print(parser(a, st('e')));
 	*/
+/*
 	fs_t *a = create_fs("djd oijoij ijoj  ijiv y o huho");
 	print(gnw(a));
 	print(gnw(a));
@@ -20,3 +21,4 @@ int main()
 
 	return 0;
 }
+*/

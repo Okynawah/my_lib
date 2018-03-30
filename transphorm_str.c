@@ -24,7 +24,6 @@ char 	*conv_int_str(int nbr)
 
 	rt[i] = '\0';
 	rt = my_revstr(rt);
-
 	return (char *)(rt);
 }
 
@@ -46,4 +45,18 @@ char *my_revstr(char *str)
 		m = m - 1;
 	}
 	return (str);
+}
+
+int conv_str_int(char *str)
+{
+	int i = 0;
+	int neg = 1;
+	long num = 0;
+
+	for (;str[i] == '-' || str[i] == '+';i++)
+		neg = (str[i] == '-') ? neg * -1 : neg;
+
+	for (;str[i] > 47 && str[i] < 58 && str[i] != '\0';i++) 
+		num = (str[i] > 47 && str[i] < 58) ? (num * 10) + str[i] - 48 : num;
+	return ((num > 2147483648 &&(neg == -1 || neg == 1)) ? 0 : num * neg);
 }

@@ -1,6 +1,9 @@
+LIB_NAME 	=	lib_global.a
+
 all: 
-	gcc -c *.c
-	ar r lib.a *.o
-	ranlib lib.a
+	gcc -c *.c	
+	find . -name $(LIB_NAME) -type f -delete
+	ar r include/$(LIB_NAME) *.o
+	ranlib include/$(LIB_NAME)
 	rm *.o
-	gcc -L lib.a -o oui *.c -g
+	gcc -I ./include -L include/$(LIB_NAME) -include/$(LIB_NAME) test.c -g
