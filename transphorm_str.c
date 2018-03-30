@@ -56,7 +56,8 @@ int conv_str_int(char *str)
 	for (;str[i] == '-' || str[i] == '+';i++)
 		neg = (str[i] == '-') ? neg * -1 : neg;
 
-	for (;str[i] > 47 && str[i] < 58 && str[i] != '\0';i++) 
-		num = (str[i] > 47 && str[i] < 58) ? (num * 10) + str[i] - 48 : num;
+	for (;str[i] > 47 && str[i] < 58 && str[i] != '\0';i++)
+		if (str[i] > 47 && str[i] < 58)
+			num = (num * 10) + str[i] - 48;
 	return ((num > 2147483648 &&(neg == -1 || neg == 1)) ? 0 : num * neg);
 }
