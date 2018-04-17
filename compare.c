@@ -58,8 +58,7 @@ int	my_strcmp_end(char *origin, char *end)
 int is_in(char *str, char *source)
 {
 	int j = 0;
-	for (int i = 0;source[i];i++)
-	{
+	for (int i = 0;source[i];i++) {
 		if (source[i] == str[j])
 			++j;
 		else

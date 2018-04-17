@@ -34,7 +34,7 @@ char *parser(char *str, char *s)
 	if (strc_strt(str, save) == 1)
 		rt = malloc(sizeof(char) * my_strlen(str) - (my_strlen(s) + i));
 	else
-		rt = malloc(sizeof(char) * i);
+		rt = malloc(sizeof(char) * (i));
 	i = (strc_strt(str, save) != 1) ? 0 : i + my_strlen(s);
 	for (int j = 0;str[i] && !strc_strt(reduce_from(str, i), s);i++, j++)
 		rt[j] = str[i];
@@ -44,6 +44,10 @@ char *parser(char *str, char *s)
 char *reduce_from(char *str, int from)
 {
 	char *rt = malloc(sizeof(char) * (my_strlen(str) - from));
+	if (!str)
+		return (NULL);
+	if (my_strlen(str) <= from)
+		return (NULL);
 	for (int i = from;str[i];i++)
 		rt[i - from] = str[i];
 	return (rt);

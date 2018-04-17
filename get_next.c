@@ -6,7 +6,7 @@
 */
 #include "header_lib.h"
 
-int facility(char c)
+int condit(char c)
 {
 	if (!c)
 		return (0);
@@ -16,8 +16,10 @@ int facility(char c)
 char *gnw(fs_t *s)
 {
 	char *rt;
-	for (;facility(s->txt[s->pif]);++s->pif);
-	rt = malloc(sizeof(char) * strle_nw(s));
+	int count;
+	for (;condit(s->txt[s->pif]);++s->pif);
+	count = strle_nw(s);
+	rt = malloc(sizeof(char) * (count + 1));
 	for (int j = 0;s->txt[s->pif]; s->pif++, j++) {
 		rt[j] = s->txt[s->pif];
 		if (s->txt[s->pif+1] == ' ' || s->txt[s->pif+1] == '\n') {
@@ -26,7 +28,7 @@ char *gnw(fs_t *s)
 			break;
 		}
 	}
-	rt[sizeof(rt)] = '\0';
+	rt[count] = '\0';
 	return (rt);
 }
 
@@ -70,16 +72,14 @@ char *uptog(char *str)
 int strle_nw(fs_t *st)
 {
 	int i = st->pif;
-	int j = i;
-	for (;st->txt[j] == ' ' || st->txt[j] == ' '; ++j);
-	i = j;
+	for (;st->txt[i] == ' ' || st->txt[i] == '\t'
+		|| st->txt[i] == '\n'; i++);
 	if (st->txt[i] != ' ')
 		for (;st->txt[i];i++)
-			if (st->txt[i] != ' ' && st->txt[i] != '\n')
+			if (st->txt[i] == ' ' || st->txt[i] == '\n')
 				break;
-
 	for (;st->txt[i];i++)
 		if (st->txt[i] == ' ' || st->txt[i] == '\n')
 			break;
-	return (st->pif - (st->fprec - j));
+	return (i - st->pif);
 }

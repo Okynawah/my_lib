@@ -21,24 +21,14 @@ char *st(char c)
 	return (rt);
 }
 
-void print(char *str)
-{
-	if (!str)
-		return;
-	if (my_strlen(str) <= 0)
-		return;
-	for (int i = 0; str[i];i++)
-		write(1, &str[i], 1);
-}
-
-char *upto(char *str)
+char *upton(char *str)
 {
 	int i = 0;
 	char *rt;
 	for (;str[i];i++)
 		if (str[i] == '\n')
 			break;
-	rt = malloc(sizeof(char) * i);
+	rt = malloc(sizeof(char) * (i + 1));
 	for (int j = 0; j < i; j++)
 		rt[j] = str[j];
 	rt[i] = '\0';
